@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Ahmad Bajri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== GLOBAL RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== COLORS ===== */
+    .bajri-dark  { background: #181510; }
+    .bajri-light { background: #f2ede3; }
+
+    /* ===== NAVBAR ===== */
+    .bajri-nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: #0f0e0b;
+      border-bottom: 1px solid rgba(212,180,120,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 3rem;
+      gap: 1rem;
+    }
+    .bajri-nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: #f0ebe0;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .bajri-nav-logo span { color: #d4b478; }
+    .bajri-nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .bajri-nav-links a {
+      text-decoration: none;
+      color: #b0a898;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .bajri-nav-links a:hover { color: #d4b478; }
+    .bajri-nav-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #d4b478;
+      text-decoration: none;
+      border: 1px solid rgba(212,180,120,0.4);
+      padding: 0.45rem 1rem;
+      transition: background 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .bajri-nav-email:hover { background: rgba(212,180,120,0.1); border-color: #d4b478; }
+
+    /* ===== HERO ===== */
+    .bajri-hero {
+      background: #0f0e0b;
+      min-height: calc(100vh - 54px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5rem;
+      padding: 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .bajri-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 42%;
+      background: linear-gradient(135deg, #1a1510 0%, #221d14 100%);
+      clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+      z-index: 0;
+    }
+    .bajri-hero-left {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      z-index: 1;
+      align-self: center;
+    }
+    .bajri-photo-wrap {
+      position: relative;
+      width: 180px;
+      height: 180px;
+    }
+    .bajri-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      border: 2px solid rgba(212,180,120,0.4);
+      display: block;
+    }
+    .bajri-photo-placeholder {
+      display: none;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #2a2418, #3d3020);
+      border: 2px solid rgba(212,180,120,0.4);
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: #d4b478;
+      font-weight: 300;
+    }
+    .bajri-photo-label {
+      position: absolute;
+      bottom: -10px; left: 50%;
+      transform: translateX(-50%);
+      background: #d4b478;
+      color: #1c1c1c;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.9rem;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .bajri-socials {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+    .bajri-soc {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(212,180,120,0.3);
+      color: #b0a898;
+      text-decoration: none;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .bajri-soc:hover { color: #d4b478; border-color: #d4b478; background: rgba(212,180,120,0.08); }
+
+    .bajri-hero-right {
+      flex: 1;
+      z-index: 1;
+      align-self: center;
+    }
+    .bajri-greeting {
+      font-size: 0.82rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #c8a050;
+      margin-bottom: 0.6rem;
+    }
+    .bajri-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      color: #f0ebe0;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+    .bajri-roles {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 1.8rem;
+    }
+    .bajri-role-main {
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #d4b478;
+      font-weight: 500;
+    }
+    .bajri-role-amp {
+      color: #5a5040;
+      font-size: 1rem;
+    }
+    .bajri-role-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: #b89a60;
+      line-height: 1.5;
+    }
+    .bajri-line {
+      width: 55px; height: 1px;
+      background: linear-gradient(90deg, #d4b478, transparent);
+      margin-bottom: 1.4rem;
+    }
+    .bajri-bio {
+      font-size: 0.97rem;
+      line-height: 1.95;
+      color: #ccc4b6;
+      max-width: 510px;
+      margin-bottom: 2rem;
+    }
+    .bajri-cta-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+    /* ===== BUTTONS ===== */
+    .bajri-btn-gold {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: #d4b478; color: #1c1c1c;
+      padding: 0.7rem 1.6rem;
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'Barlow', sans-serif;
+    }
+    .bajri-btn-gold:hover { background: #e8c87a; }
+    .bajri-btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: #d4b478;
+      padding: 0.7rem 1.6rem;
+      font-size: 0.8rem; font-weight: 400;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none; border: 1px solid rgba(212,180,120,0.5); cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+      font-family: 'Barlow', sans-serif;
+    }
+    .bajri-btn-outline:hover { border-color: #d4b478; background: rgba(212,180,120,0.1); }
+
+    /* ===== SECTIONS ===== */
+    .bajri-section { padding: 5.5rem 3rem; }
+    .bajri-container { max-width: 1100px; margin: 0 auto; }
+    .bajri-section-head { margin-bottom: 2.8rem; }
+    .bajri-label-gold {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #c8a050;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .bajri-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+    .bajri-section-title.dark  { color: #1c1a14; }
+    .bajri-section-title.light { color: #f0ebe0; }
+
+    /* ===== ABOUT ===== */
+    .bajri-about-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .bajri-about-p {
+      font-size: 0.97rem;
+      color: #3d3830;
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+    .bajri-about-stats {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(180,150,80,0.2);
+    }
+    .bajri-stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: #c8a050;
+    }
+    .bajri-stat-l { font-size: 0.75rem; color: #8a7a60; text-transform: uppercase; letter-spacing: 0.1em; }
+    .bajri-stat-div { width: 1px; height: 36px; background: rgba(180,150,80,0.25); }
+
+    .bajri-info-card {
+      background: #1f1c16;
+      border: 1px solid rgba(212,180,120,0.15);
+      padding: 1.8rem;
+    }
+    .bajri-info-card::before {
+      content: '';
+      display: block;
+      height: 2px;
+      background: linear-gradient(90deg, #d4b478, #8b6914);
+      margin: -1.8rem -1.8rem 1.6rem;
+    }
+    .bajri-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      gap: 1rem;
+    }
+    .bajri-info-row.last { border-bottom: none; }
+    .bajri-info-k { font-size: 0.75rem; color: #7a6a50; text-transform: uppercase; letter-spacing: 0.1em; }
+    .bajri-info-v { font-size: 0.9rem; color: #e0d8cc; text-align: right; }
+    .bajri-badge {
+      background: rgba(212,180,120,0.15);
+      color: #d4b478 !important;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.75rem !important;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(212,180,120,0.3);
+    }
+
+    /* ===== SKILLS ===== */
+    .bajri-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+    .bajri-skill-card {
+      background: #221f18;
+      border: 1px solid rgba(212,180,120,0.1);
+      padding: 1.6rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .bajri-skill-card:hover { border-color: rgba(212,180,120,0.5); transform: translateY(-4px); }
+    .bajri-skill-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
+    .bajri-skill-name { font-weight: 500; font-size: 0.92rem; color: #e8dece; margin-bottom: 0.4rem; letter-spacing: 0.02em; }
+    .bajri-skill-desc { font-size: 0.82rem; color: #8a8070; line-height: 1.6; }
+    .bajri-bar { height: 2px; background: rgba(255,255,255,0.06); margin-top: 1rem; }
+    .bajri-bar-fill { height: 100%; background: linear-gradient(90deg, #d4b478, #8b6914); }
+
+    /* ===== PROJECTS ===== */
+    .bajri-projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.4rem;
+    }
+    .bajri-proj-card {
+      background: #fff;
+      border: 1px solid #e0d8cc;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      cursor: pointer;
+    }
+    .bajri-proj-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+    .bajri-proj-thumb {
+      height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem;
+      position: relative;
+      background-color: #2a2020;
+    }
+    .bajri-proj-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .bajri-proj-card:hover .bajri-proj-overlay { opacity: 1; }
+    .t1 { background: linear-gradient(135deg, #1a1a2e, #2a2060); }
+    .t2 { background: linear-gradient(135deg, #1a0a00, #3d1f00); }
+    .t3 { background: linear-gradient(135deg, #0d1a0d, #1a3520); }
+    .bajri-proj-body { padding: 1.4rem; }
+    .bajri-proj-tag { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em; color: #c8a050; margin-bottom: 0.4rem; font-weight: 500; }
+    .bajri-proj-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: #1c1a14; margin-bottom: 0.5rem; font-weight: 600; }
+    .bajri-proj-desc { font-size: 0.83rem; color: #6a6050; line-height: 1.7; }
+
+    /* ===== LIGHTBOX ===== */
+    .bajri-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 14, 11, 0.95);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      animation: bajriFadeIn 0.25s ease;
+    }
+    .bajri-lightbox.active { display: flex; }
+    @keyframes bajriFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .bajri-lightbox-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .bajri-lightbox-content img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border: 2px solid #d4b478;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .bajri-lightbox-caption {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: #d4b478;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+    .bajri-lightbox-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: transparent;
+      border: 1px solid rgba(212,180,120,0.4);
+      color: #d4b478;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      z-index: 10000;
+    }
+    .bajri-lightbox-close:hover {
+      background: rgba(212,180,120,0.15);
+      border-color: #d4b478;
+    }
+
+    /* ===== CONTACT ===== */
+    .bajri-contact-inner { text-align: center; max-width: 700px; }
+    .bajri-contact-sub { font-size: 0.97rem; color: #9a9080; margin: 0.8rem 0 2rem; }
+    .bajri-email-big {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2.8vw, 2rem);
+      font-weight: 300;
+      color: #d4b478;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,180,120,0.3);
+      padding-bottom: 0.3rem;
+      margin-bottom: 2rem;
+      transition: border-color 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .bajri-email-big:hover { border-color: #d4b478; }
+    .bajri-contact-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .bajri-socials-center { justify-content: center; margin-top: 0.5rem; }
+
+    /* ===== FOOTER ===== */
+    .bajri-footer {
+      background: #0f0e0b;
+      border-top: 1px solid rgba(212,180,120,0.12);
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: #5a5040;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .bajri-about-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .bajri-nav { padding: 0.9rem 1.5rem; }
+      .bajri-nav-links { display: none; }
+      .bajri-hero { flex-direction: column; gap: 2.5rem; padding: 3.5rem 1.5rem; min-height: auto; text-align: center; }
+      .bajri-hero::before { width: 100%; clip-path: none; }
+      .bajri-hero-left { flex: none; }
+      .bajri-roles { align-items: center; }
+      .bajri-line { margin-left: auto; margin-right: auto; }
+      .bajri-bio { margin-left: auto; margin-right: auto; }
+      .bajri-cta-row { justify-content: center; }
+      .bajri-section { padding: 3.5rem 1.5rem; }
+      .bajri-footer { flex-direction: column; text-align: center; padding: 1.2rem 1.5rem; }
+      .bajri-lightbox-close { top: 1rem; right: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="bajri-nav">
+  <div class="bajri-nav-logo">Ahmad<span>.</span></div>
+  <ul class="bajri-nav-links">
+    <li><a href="#bajri-home">Home</a></li>
+    <li><a href="#bajri-about">Tentang</a></li>
+    <li><a href="#bajri-skills">Keahlian</a></li>
+    <li><a href="#bajri-projects">Proyek</a></li>
+    <li><a href="#bajri-contact">Kontak</a></li>
+  </ul>
+  <a href="mailto:ahmadbajri@email.com" class="bajri-nav-email">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    Email Saya
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="bajri-hero" id="bajri-home">
+  <div class="bajri-hero-left">
+    <div class="bajri-photo-wrap">
+      <img src="https://blue-oyster-750143.hostingersite.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-08-at-14.07.42.jpeg" alt="Ahmad Bajri" class="bajri-photo"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="bajri-photo-placeholder">AB</div>
+      <div class="bajri-photo-label">Ahmad Bajri</div>
+    </div>
+    <div class="bajri-socials">
+      <a href="#" class="bajri-soc" title="YouTube">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="#" class="bajri-soc" title="Instagram">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+      <a href="#" class="bajri-soc" title="WhatsApp">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="bajri-hero-right">
+    <p class="bajri-greeting">Hi, I'm</p>
+    <h1 class="bajri-name">Ahmad Bajri</h1>
+    <div class="bajri-roles">
+      <span class="bajri-role-main">UI/UX Designer</span>
+      <span class="bajri-role-amp">&amp;</span>
+      <span class="bajri-role-sub">Interpretation of the Quran<br>of the Theologian of Islamic</span>
+    </div>
+    <div class="bajri-line"></div>
+    <p class="bajri-bio">
+      Nama Saya Ahmad Bajri, seorang desainer yang berfokus pada penciptaan solusi visual yang tidak hanya estetis, tetapi juga komunikatif. Dengan pengalaman dalam menggabungkan kreativitas dan strategi, saya membantu brand dan individu menyampaikan pesan mereka melalui desain yang bermakna.
+    </p>
+    <div class="bajri-cta-row">
+      <a href="#bajri-projects" class="bajri-btn-gold">Lihat Proyek</a>
+      <a href="mailto:ahmadbajri@email.com" class="bajri-btn-outline">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Kirim Email
+      </a>
+      <a href="" class="bajri-btn-outline" download>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download CV
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="bajri-section bajri-light" id="bajri-about">
+  <div class="bajri-container">
+    <div class="bajri-section-head">
+      <span class="bajri-label-gold">— Tentang Saya</span>
+      <h2 class="bajri-section-title dark">Siapa Ahmad Bajri?</h2>
+    </div>
+    <div class="bajri-about-grid">
+      <div class="bajri-about-text-col">
+        <p class="bajri-about-p">Saya adalah mahasantri aktif di PETIK II Jombang, jurusan Digital Marketing. Di usia 20 tahun, saya telah mengembangkan dua passion utama: desain UI/UX yang berpusat pada manusia, dan kajian mendalam terhadap tafsir Al-Quran.</p>
+        <p class="bajri-about-p">Kedua bidang ini saling melengkapi — kepekaan estetis dari desain memperkaya cara saya menyampaikan pesan, sementara kedalaman kajian Islam membentuk nilai-nilai yang melandasi setiap karya saya.</p>
+        <div class="bajri-about-stats">
+          <div class="bajri-stat">
+            <div class="bajri-stat-n">20</div>
+            <div class="bajri-stat-l">Tahun</div>
+          </div>
+          <div class="bajri-stat-div"></div>
+          <div class="bajri-stat">
+            <div class="bajri-stat-n">DM</div>
+            <div class="bajri-stat-l">Jurusan</div>
+          </div>
+          <div class="bajri-stat-div"></div>
+          <div class="bajri-stat">
+            <div class="bajri-stat-n">Jombang</div>
+            <div class="bajri-stat-l">Lokasi</div>
+          </div>
+        </div>
+      </div>
+      <div class="bajri-info-card">
+        <div class="bajri-info-row"><span class="bajri-info-k">Nama</span><span class="bajri-info-v">Ahmad Bajri</span></div>
+        <div class="bajri-info-row"><span class="bajri-info-k">Usia</span><span class="bajri-info-v">20 Tahun</span></div>
+        <div class="bajri-info-row"><span class="bajri-info-k">Sekolah</span><span class="bajri-info-v">PETIK II Jombang</span></div>
+        <div class="bajri-info-row"><span class="bajri-info-k">Jurusan</span><span class="bajri-info-v">Digital Marketing</span></div>
+        <div class="bajri-info-row"><span class="bajri-info-k">Fokus</span><span class="bajri-info-v">UI/UX Design & Islamic Studies</span></div>
+        <div class="bajri-info-row last"><span class="bajri-info-k">Status</span><span class="bajri-info-v bajri-badge">Aktif Belajar</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="bajri-section bajri-dark" id="bajri-skills">
+  <div class="bajri-container">
+    <div class="bajri-section-head">
+      <span class="bajri-label-gold">— Keahlian</span>
+      <h2 class="bajri-section-title light">Yang Saya Kuasai</h2>
+    </div>
+    <div class="bajri-skills-grid">
+      <div class="bajri-skill-card">
+        <div class="bajri-skill-icon">🎨</div>
+        <div class="bajri-skill-name">UI/UX Design</div>
+        <div class="bajri-skill-desc">Merancang antarmuka yang intuitif dan pengalaman pengguna yang menyenangkan.</div>
+        <div class="bajri-bar"><div class="bajri-bar-fill" style="width:82%"></div></div>
+      </div>
+      <div class="bajri-skill-card">
+        <div class="bajri-skill-icon">📱</div>
+        <div class="bajri-skill-name">Social Media Marketing</div>
+        <div class="bajri-skill-desc">Strategi konten dan pengelolaan akun di Instagram, TikTok, dan platform lainnya.</div>
+        <div class="bajri-bar"><div class="bajri-bar-fill" style="width:85%"></div></div>
+      </div>
+      <div class="bajri-skill-card">
+        <div class="bajri-skill-icon">✍️</div>
+        <div class="bajri-skill-name">Content Creation</div>
+        <div class="bajri-skill-desc">Membuat konten visual dan teks yang menarik untuk kebutuhan brand digital.</div>
+        <div class="bajri-bar"><div class="bajri-bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="bajri-skill-card">
+        <div class="bajri-skill-icon">📖</div>
+        <div class="bajri-skill-name">Tafsir Al-Quran</div>
+        <div class="bajri-skill-desc">Kajian dan interpretasi Al-Quran dengan pendekatan ilmu-ilmu keislaman.</div>
+        <div class="bajri-bar"><div class="bajri-bar-fill" style="width:75%"></div></div>
+      </div>
+      <div class="bajri-skill-card">
+        <div class="bajri-skill-icon">🔍</div>
+        <div class="bajri-skill-name">SEO & Digital Ads</div>
+        <div class="bajri-skill-desc">Optimasi mesin pencari dan dasar-dasar iklan berbayar di Meta dan Google.</div>
+        <div class="bajri-bar"><div class="bajri-bar-fill" style="width:68%"></div></div>
+      </div>
+      <div class="bajri-skill-card">
+        <div class="bajri-skill-icon">🎯</div>
+        <div class="bajri-skill-name">Brand Strategy</div>
+        <div class="bajri-skill-desc">Membantu brand menemukan identitas visual dan pesan yang kuat dan konsisten.</div>
+        <div class="bajri-bar"><div class="bajri-bar-fill" style="width:72%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="bajri-section bajri-light" id="bajri-projects">
+  <div class="bajri-container">
+    <div class="bajri-section-head">
+      <span class="bajri-label-gold">— Proyek</span>
+      <h2 class="bajri-section-title dark">Karya Terbaru</h2>
+    </div>
+    <div class="bajri-projects-grid">
+
+      <!-- PROJECT 1 -->
+      <a href="#" class="bajri-proj-card"
+         data-img="GANTI_DENGAN_URL_GAMBAR_1"
+         data-title="Redesain Aplikasi UMKM"
+         onclick="bajriOpenLightbox(event, this)">
+        <div class="bajri-proj-thumb t1"
+             style="background-image: url('GANTI_DENGAN_URL_GAMBAR_1'); background-size: cover; background-position: center;">
+          <div class="bajri-proj-overlay">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+          </div>
+        </div>
+        <div class="bajri-proj-body">
+          <div class="bajri-proj-tag">UI/UX Design</div>
+          <div class="bajri-proj-title">Redesain Aplikasi UMKM</div>
+          <div class="bajri-proj-desc">Merancang ulang antarmuka aplikasi pemesanan untuk UMKM lokal Jombang agar lebih mudah digunakan.</div>
+        </div>
+      </a>
+
+      <!-- PROJECT 2 -->
+      <a href="#" class="bajri-proj-card"
+         data-img="GANTI_DENGAN_URL_GAMBAR_2"
+         data-title="Kampanye Instagram UMKM"
+         onclick="bajriOpenLightbox(event, this)">
+        <div class="bajri-proj-thumb t2"
+             style="background-image: url('GANTI_DENGAN_URL_GAMBAR_2'); background-size: cover; background-position: center;">
+          <div class="bajri-proj-overlay">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+          </div>
+        </div>
+        <div class="bajri-proj-body">
+          <div class="bajri-proj-tag">Social Media</div>
+          <div class="bajri-proj-title">Kampanye Instagram UMKM</div>
+          <div class="bajri-proj-desc">Strategi konten dan pengelolaan akun Instagram untuk meningkatkan engagement brand lokal.</div>
+        </div>
+      </a>
+
+      <!-- PROJECT 3 -->
+      <a href="#" class="bajri-proj-card"
+         data-img="GANTI_DENGAN_URL_GAMBAR_3"
+         data-title="Konten Tafsir Digital"
+         onclick="bajriOpenLightbox(event, this)">
+        <div class="bajri-proj-thumb t3"
+             style="background-image: url('GANTI_DENGAN_URL_GAMBAR_3'); background-size: cover; background-position: center;">
+          <div class="bajri-proj-overlay">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+          </div>
+        </div>
+        <div class="bajri-proj-body">
+          <div class="bajri-proj-tag">Islamic Content</div>
+          <div class="bajri-proj-title">Konten Tafsir Digital</div>
+          <div class="bajri-proj-desc">Menyajikan kajian tafsir Al-Quran dalam format visual yang modern dan mudah dipahami generasi muda.</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX MODAL -->
+<div class="bajri-lightbox" id="bajriLightbox" onclick="bajriCloseLightbox(event)">
+  <button class="bajri-lightbox-close" onclick="bajriCloseLightbox(event, true)" aria-label="Tutup">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <div class="bajri-lightbox-content" onclick="event.stopPropagation()">
+    <img src="" alt="" id="bajriLightboxImg">
+    <div class="bajri-lightbox-caption" id="bajriLightboxCaption"></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="bajri-section bajri-dark" id="bajri-contact">
+  <div class="bajri-container bajri-contact-inner">
+    <span class="bajri-label-gold">— Kontak</span>
+    <h2 class="bajri-section-title light" style="margin-top:0.5rem">Mari Berkolaborasi</h2>
+    <p class="bajri-contact-sub">Punya proyek menarik atau ingin berdiskusi? Saya selalu terbuka untuk kolaborasi baru.</p>
+    <a href="mailto:ahmadbajri@email.com" class="bajri-email-big">ahmadbajri@email.com</a>
+    <div class="bajri-contact-btns">
+      <a href="mailto:ahmadbajri@email.com" class="bajri-btn-gold">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Kirim Email
+      </a>
+      <a href="#" class="bajri-btn-outline">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+    <div class="bajri-socials bajri-socials-center">
+      <a href="#" class="bajri-soc" title="YouTube"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+      <a href="#" class="bajri-soc" title="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+      <a href="#" class="bajri-soc" title="WhatsApp"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bajri-footer">
+  <span>© 2025 Ahmad Bajri</span>
+  <span>UI/UX Designer &amp; Islamic Theologian — Jombang</span>
+</footer>
+
+<script>
+function bajriOpenLightbox(e, el) {
+  e.preventDefault();
+  var img = el.getAttribute('data-img');
+  var title = el.getAttribute('data-title');
+  if (!img || img.indexOf('GANTI_DENGAN_URL') === 0) {
+    alert('Gambar belum diatur. Silakan ganti nilai data-img dan background-image di kode HTML dengan URL gambar kamu.');
+    return;
+  }
+  document.getElementById('bajriLightboxImg').src = img;
+  document.getElementById('bajriLightboxImg').alt = title;
+  document.getElementById('bajriLightboxCaption').textContent = title;
+  document.getElementById('bajriLightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function bajriCloseLightbox(e, force) {
+  if (force || e.target.id === 'bajriLightbox' || (e.currentTarget && e.currentTarget.classList && e.currentTarget.classList.contains('bajri-lightbox-close'))) {
+    document.getElementById('bajriLightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    var lb = document.getElementById('bajriLightbox');
+    if (lb && lb.classList.contains('active')) {
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+});
+</script>
+
+</body>
+</html>
